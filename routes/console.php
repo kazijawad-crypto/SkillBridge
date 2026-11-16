@@ -8,5 +8,5 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
 
-
 Schedule::command('milestones:detect-overdue')->daily();
+Schedule::command('notifications:send-deadlines')->hourly()->withoutOverlapping();

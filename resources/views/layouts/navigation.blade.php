@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false }" data-notification-url="{{ route('notifications.count') }}" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -64,6 +64,11 @@
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
                         </x-dropdown-link>
+                        <x-dropdown-link :href="route('messages.index')">Messages</x-dropdown-link>
+                        <x-dropdown-link :href="route('notifications.index')">
+                            Notifications
+                            <span data-notification-count @if($unreadNotificationCount === 0) hidden @endif class="ml-1 rounded-full bg-indigo-100 px-2 py-0.5 text-xs text-indigo-800">{{ $unreadNotificationCount > 99 ? '99+' : $unreadNotificationCount }}</span>
+                        </x-dropdown-link>
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
@@ -100,6 +105,11 @@
 
             <x-responsive-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')">
                 {{ __('Browse Projects') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('messages.index')" :active="request()->routeIs('messages.*')">Messages</x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('notifications.index')" :active="request()->routeIs('notifications.*')">
+                Notifications
+                <span data-notification-count @if($unreadNotificationCount === 0) hidden @endif class="ml-1 rounded-full bg-indigo-100 px-2 py-0.5 text-xs text-indigo-800">{{ $unreadNotificationCount > 99 ? '99+' : $unreadNotificationCount }}</span>
             </x-responsive-nav-link>
 
             @auth

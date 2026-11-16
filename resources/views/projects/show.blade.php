@@ -102,6 +102,15 @@
             @endif
 
             {{-- Milestones link (Walid's module) --}}
+            <div class="bg-white shadow rounded-lg p-6 flex flex-wrap items-center justify-between gap-3">
+                <div>
+                    <h3 class="font-semibold text-gray-700">Project messages</h3>
+                    <p class="text-sm text-gray-500">Discuss this project in a private conversation.</p>
+                </div>
+                <a href="{{ route('messages.create', ['project_id' => $project->id, 'recipient_id' => auth()->id() !== $project->client_id ? $project->client_id : null]) }}"
+                   class="px-4 py-2 bg-indigo-600 text-white text-sm rounded-md hover:bg-indigo-700">{{ auth()->id() === $project->client_id ? 'Contact a freelancer' : 'Message client' }}</a>
+            </div>
+
             <div class="bg-white shadow rounded-lg p-6 flex items-center justify-between">
                 <div>
                     <h3 class="font-semibold text-gray-700">Milestones</h3>

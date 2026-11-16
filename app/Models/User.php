@@ -29,7 +29,7 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            'password'          => 'hashed',
+            'password' => 'hashed',
         ];
     }
 
@@ -61,8 +61,8 @@ class User extends Authenticatable
     public function skills(): BelongsToMany
     {
         return $this->belongsToMany(Skill::class, 'user_skills')
-                    ->withPivot('proficiency')
-                    ->withTimestamps();
+            ->withPivot('proficiency')
+            ->withTimestamps();
     }
 
     /** UserSkill pivot records (needed for endorsement lookups). */
@@ -75,5 +75,10 @@ class User extends Authenticatable
     public function projects(): HasMany
     {
         return $this->hasMany(Project::class, 'client_id');
+    }
+
+    public function notificationPreference(): HasOne
+    {
+        return $this->hasOne(NotificationPreference::class);
     }
 }
